@@ -6,6 +6,31 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [0.2.0] - 2026-09-15
+
+### Added
+* Next.js 15 (React 19) and TypeScript setup with `@google/genai` dependency.
+* Tailwind CSS and PostCSS configuration with custom waste category theme color palette.
+* Clean source directory architecture: `src/app`, `src/components`, `src/lib`, `src/types`.
+* TypeScript contracts in `src/types/waste.ts` for classification results, categories, and API requests/responses.
+* Initial root layout (`src/app/layout.tsx`), Tailwind globals (`src/app/globals.css`), and minimal placeholder page (`src/app/page.tsx`).
+
+### Changed
+* Updated `ROADMAP.md` marking Phase 2 tasks complete.
+* Updated `PROJECT_CONTEXT.md` to reflect Phase 2 completion and prepare for Phase 3 UI development.
+
+### Fixed
+* None.
+
+### Important Decisions
+* **Strict Minimal Dependencies**: Confined dependencies strictly to Next.js 15, React 19, TypeScript, Tailwind CSS, and `@google/genai` to prevent bloat.
+* **Build & Dev Verification**: Confirmed that `npm run build` succeeds and `next dev` starts and returns HTTP 200 prior to UI implementation.
+
+### Next Step
+* Await approval to proceed to Phase 3: Core UI Implementation.
+
+---
+
 ## [0.1.0] - 2026-09-15
 
 ### Added

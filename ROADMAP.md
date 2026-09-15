@@ -14,10 +14,11 @@ This checklist tracks the implementation progress of the **AI Waste Segregation 
 ---
 
 ## Phase 2: Application Scaffolding & Setup
-- [ ] Initialize Next.js 15 project with TypeScript and Tailwind CSS
-- [ ] Configure environment variables template (`.env.local.example`)
-- [ ] Install AI SDK / HTTP dependencies (`@google/genai` or standard fetch client)
-- [ ] Establish initial project folder structure (`src/app`, `src/components`, `src/lib`, `src/types`)
+- [x] Initialize Next.js 15 project with TypeScript and Tailwind CSS
+- [x] Configure environment variables template (`.env.local.example`)
+- [x] Install AI SDK / HTTP dependencies (`@google/genai` or standard fetch client)
+- [x] Establish initial project folder structure (`src/app`, `src/components`, `src/lib`, `src/types`)
+
 
 ---
 
