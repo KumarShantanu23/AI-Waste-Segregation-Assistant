@@ -6,6 +6,33 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [0.3.0] - 2026-09-15
+
+### Added
+* Core user interface components:
+  * `Header.tsx`: Project title, subtitle, and UN SDG 12 indicator badge.
+  * `QuickExamples.tsx`: Five clickable prompt chips (*"Plastic water bottle"*, *"Used tissue"*, *"Pizza box with leftover food"*, *"Old mobile phone"*, *"Glass bottle"*).
+  * `WasteInput.tsx`: Accessible input form with character limit counter (`0 / 150`), clear button, guidance hint, and disabled/active state submission button.
+  * `ResultSkeleton.tsx`: Reusable animated placeholder component structuring category badge, disposal steps, material reasoning, sustainability tip, and municipal disclaimer.
+  * `Footer.tsx`: Educational disclaimer and SDG 12 attribution.
+* Integrated responsive main page in `src/app/page.tsx` with interactive chip selection, input handling, and skeleton preview toggle.
+
+### Changed
+* Updated `ROADMAP.md` checking off Phase 3 tasks.
+* Updated `PROJECT_CONTEXT.md` to reflect Phase 3 completion and document readiness for Phase 4.
+
+### Fixed
+* None.
+
+### Important Decisions
+* **Strict Phase Isolation**: The "Classify Waste" button is visually enabled when input is valid, but strictly prevented from calling any API or classification logic during Phase 3.
+* **Component Modularity**: Extracted `Header`, `WasteInput`, `QuickExamples`, `ResultSkeleton`, and `Footer` into dedicated, typed components in `src/components/` without adding any third-party UI libraries.
+
+### Next Step
+* Await approval to proceed to Phase 4: Backend API & AI Integration (`POST /api/classify` with Google Gemini Flash and local fallback engine).
+
+---
+
 ## [0.2.0] - 2026-09-15
 
 ### Added

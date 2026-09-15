@@ -23,10 +23,11 @@ This checklist tracks the implementation progress of the **AI Waste Segregation 
 ---
 
 ## Phase 3: Core UI Implementation
-- [ ] Build Header with SDG 12 badge and concise app summary
-- [ ] Implement Waste Item Input component with submit button and keyboard support
-- [ ] Implement Quick-Example interactive chips (the 5 core evaluation items)
-- [ ] Build Loading Skeleton & responsive layout container
+- [x] Build Header with SDG 12 badge and concise app summary
+- [x] Implement Waste Item Input component with submit button and keyboard support
+- [x] Implement Quick-Example interactive chips (the 5 core evaluation items)
+- [x] Build Loading Skeleton & responsive layout container
+
 
 ---
 
