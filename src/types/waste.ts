@@ -17,6 +17,7 @@ export interface WasteClassificationResult {
   explanation: string;
   sustainability_tip: string;
   uncertainty_note?: string | null;
+  source: "gemini" | "fallback";
 }
 
 /**

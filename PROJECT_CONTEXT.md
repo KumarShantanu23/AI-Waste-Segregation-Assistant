@@ -1,8 +1,8 @@
 # Project Context
 
-**File Version:** 1.2.0  
-**Last Updated:** 2026-09-15  
-**Active Phase:** Phase 3 — Core UI Implementation (Complete, Awaiting Phase 4 Approval)  
+**File Version:** 1.3.0  
+**Last Updated:** 2026-09-16  
+**Active Phase:** Phase 4 — Backend API & AI Integration (Complete, Awaiting Phase 5 Approval)  
 
 ---
 
@@ -18,28 +18,28 @@
 
 ## 2. Current Implementation Status
 
-* **Development Phase:** Phase 3 Complete (Core UI Implementation)
+* **Development Phase:** Phase 4 Complete (Backend API & AI Integration)
 * **Completed Features:**
   * Git repository initialized with documentation suite.
   * Next.js 15, React 19, TypeScript, and Tailwind CSS configured.
-  * Dependency footprint established with zero unnecessary packages.
-  * Header component with UN SDG 12 badge and mission summary (`src/components/Header.tsx`).
-  * WasteInput component with clear labeling, character limit counter (150 chars), clear button, and accessible submission (`src/components/WasteInput.tsx`).
-  * Interactive QuickExamples chips for the 5 evaluation items (`src/components/QuickExamples.tsx`).
-  * Reusable animated ResultSkeleton component ready for future classification response (`src/components/ResultSkeleton.tsx`).
-  * Footer component with educational disclaimer (`src/components/Footer.tsx`).
-  * Responsive layout verified across mobile, tablet, and desktop viewports.
-* **Current Feature:** Core UI verified; zero API calls or mock classification triggered yet.
-* **Next Task:** Phase 4 — Backend API & AI Integration (`POST /api/classify` with Google Gemini API `@google/genai` and fallback rule engine).
+  * UI components built in Phase 3 (`Header`, `WasteInput`, `QuickExamples`, `ResultSkeleton`, `Footer`).
+  * Backend route handler implemented at `POST /api/classify` with strict input validation (length 2–150 characters, JSON body parsing).
+  * Gemini AI integration implemented via `@google/genai` using model `gemini-3.8-flash`, structured JSON schema enforcement, and built-in `AbortController` timeout (5000ms).
+  * Deterministic fallback classification engine implemented in `src/lib/fallbackClassifier.ts` covering the 5 evaluation prompts (*"Plastic water bottle"*, *"Used tissue"*, *"Pizza box with leftover food"*, *"Old mobile phone"*, *"Glass bottle"*), common materials, and a safe general default.
+  * Source transparency added via `source: "gemini" | "fallback"` in `WasteClassificationResult`.
+  * Comprehensive test suite verifying valid requests, invalid inputs (empty, too short, too long, malformed JSON), and fallback resilience.
+* **Current Feature:** Backend API & AI Integration complete and verified.
+* **Next Task:** Phase 5 — Result Card & Guidance Display (Connect frontend to `/api/classify` and display real classification results).
 
 ---
 
 ## 3. Current Architecture Summary
 * **Monolithic Full-Stack:** Next.js 15 (App Router) handling both frontend UI and server-side API routes.
-* **Frontend:** Single-Page Application (SPA) with responsive Tailwind CSS, dynamic loading states, category-themed visual badges, and quick-example chips.
-* **Backend:** Server-side route handler (`POST /api/classify`) acting as a secure proxy to Google Gemini API.
-* **AI Engine:** Google Gemini API (`gemini-1.5-flash` / `gemini-2.0-flash`) returning structured JSON output.
-* **Fallback Rule Engine:** In-memory deterministic classifier for standard items if `GEMINI_API_KEY` is not provided (ensures immediate evaluator testability).
+* **Frontend:** Single-Page Application (SPA) with responsive Tailwind CSS (ready for Phase 5 integration).
+* **Backend:** Server-side route handler (`POST /api/classify`) accepting `{ item: string }` and returning structured `WasteClassificationResult`.
+* **AI Engine:** Google Gemini API (`gemini-3.8-flash`) using `@google/genai` with structured JSON output schema and 5-second abort timeout.
+* **Fallback Rule Engine:** In-memory deterministic classifier in `src/lib/fallbackClassifier.ts` ensuring graceful handling when `GEMINI_API_KEY` is omitted, invalid, or experiencing rate limits/network failures.
+* **Environment Variable:** `GEMINI_API_KEY` kept strictly server-side (never prefixed with `NEXT_PUBLIC_`).
 * **Storage / Database:** None (stateless design).
 
 ---

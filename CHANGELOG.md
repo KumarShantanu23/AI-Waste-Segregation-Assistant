@@ -6,6 +6,39 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [0.4.0] - 2026-09-16
+
+### Added
+* Backend route handler `POST /api/classify` in `src/app/api/classify/route.ts`:
+  * Validates JSON request payload and item string presence.
+  * Enforces length constraints (2 to 150 characters) and rejects whitespace-only queries with HTTP 400.
+  * Sanitizes inputs and guarantees clean, mask-protected HTTP 500 responses without exposing stack traces or internals.
+* Google Gemini AI integration in `src/lib/gemini.ts`:
+  * Powered by `gemini-3.8-flash` via `@google/genai`.
+  * Enforces structured JSON output matching `WasteClassificationResult` schema (`item`, `category`, `disposal_method`, `explanation`, `sustainability_tip`, `uncertainty_note`).
+  * Built-in `AbortController` timeout (5000ms) to protect against hanging API requests.
+* Deterministic local fallback classifier in `src/lib/fallbackClassifier.ts`:
+  * Handles standard evaluation examples (*"Plastic water bottle"*, *"Used tissue"*, *"Pizza box with leftover food"*, *"Old mobile phone"*, *"Glass bottle"*), common organic/recyclable materials, and safe general waste defaults.
+  * Provides seamless offline evaluation when `GEMINI_API_KEY` is not present or when API calls fail/time out.
+* Source metadata field (`source: "gemini" | "fallback"`) added to `WasteClassificationResult` for clear origin transparency.
+* Updated `.env.local.example` with `GEMINI_API_KEY=`.
+
+### Changed
+* Updated `ROADMAP.md` checking off all Phase 4 tasks.
+* Updated `PROJECT_CONTEXT.md` recording Phase 4 completion and active phase status.
+
+### Fixed
+* Added `AbortController` timeout to prevent hanging on network delays or invalid API keys.
+
+### Important Decisions
+* **AI Model Selection**: Targeted `gemini-3.8-flash` as the current stable Flash model via official `@google/genai` SDK.
+* **Strict Privacy & Responsible AI**: Stateless request handling (zero user data saved), transparent `source` identification, and disclaimers emphasizing that municipal recycling rules differ by location.
+
+### Next Step
+* Await approval to proceed to Phase 5: Result Card & Guidance Display (Connecting frontend to `/api/classify` and presenting real classification results).
+
+---
+
 ## [0.3.0] - 2026-09-15
 
 ### Added

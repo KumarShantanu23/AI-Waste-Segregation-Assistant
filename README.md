@@ -65,8 +65,8 @@ This project contributes directly to **UN SDG 12: Ensure sustainable consumption
 * **Frontend**: Next.js 15 (React 19) with TypeScript
 * **Styling**: Tailwind CSS (clean, responsive, modern card-based UI)
 * **Backend**: Next.js Serverless API Route (`/api/classify`)
-* **AI Engine**: Google Gemini API (`gemini-1.5-flash` / `gemini-2.0-flash`) with structured JSON schema output
-* **Offline / Fallback Support**: Built-in mock classification engine for common items when offline or when no API key is present
+* **AI Engine**: Google Gemini API (`gemini-3.8-flash`) via official `@google/genai` with structured JSON schema output and timeout fallback
+* **Offline / Fallback Support**: Built-in deterministic classification engine for common items when offline, unkeyed, or during API errors
 
 ---
 
@@ -112,5 +112,6 @@ This project contributes directly to **UN SDG 12: Ensure sustainable consumption
 
 ## 📌 Project Status
 
-* **Current Phase**: Phase 1 — Project Initialization & Documentation Setup
-* **Implementation Status**: Documentation and project structure established; awaiting stack approval before full component scaffolding.
+* **Current Phase**: Phase 4 — Backend API & AI Integration Complete (Awaiting Phase 5 Approval)
+* **Implementation Status**: Backend classification endpoint (`POST /api/classify`) active with Gemini 3.8 Flash and deterministic fallback engine.
+

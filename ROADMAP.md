@@ -32,10 +32,11 @@ This checklist tracks the implementation progress of the **AI Waste Segregation 
 ---
 
 ## Phase 4: Backend API & AI Integration
-- [ ] Define TypeScript schemas and types for waste classification response
-- [ ] Implement local fallback classifier for offline / unkeyed evaluation
-- [ ] Implement Next.js route handler (`POST /api/classify`) with input validation
-- [ ] Integrate Google Gemini API with system instructions and JSON structured output schema
+- [x] Define TypeScript schemas and types for waste classification response
+- [x] Implement local fallback classifier for offline / unkeyed evaluation
+- [x] Implement Next.js route handler (`POST /api/classify`) with input validation
+- [x] Integrate Google Gemini API with system instructions and JSON structured output schema
+
 
 ---
 
