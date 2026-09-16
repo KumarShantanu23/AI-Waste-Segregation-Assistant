@@ -4,28 +4,67 @@ import React, { useState } from "react";
 import { Header } from "@/components/Header";
 import { WasteInput } from "@/components/WasteInput";
 import { ResultSkeleton } from "@/components/ResultSkeleton";
+import { ResultCard } from "@/components/ResultCard";
 import { Footer } from "@/components/Footer";
+import { ClassifyResponse, WasteClassificationResult } from "@/types/waste";
 
 export default function Home() {
   const [wasteItem, setWasteItem] = useState<string>("");
-  const [showSkeletonPreview, setShowSkeletonPreview] = useState<boolean>(false);
-  const [phase3Notice, setPhase3Notice] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [result, setResult] = useState<WasteClassificationResult | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!wasteItem.trim()) return;
 
-    // Phase 3 constraint: Do NOT call the API or classification logic yet.
-    // Provide visual confirmation that the input was captured successfully.
-    setPhase3Notice(
-      `Captured: "${wasteItem.trim()}". (Phase 3 UI verified. API classification is scheduled for Phase 4).`
-    );
+    const trimmed = wasteItem.trim();
+    if (!trimmed || trimmed.length < 2) {
+      setError("Please provide a waste item description (at least 2 characters).");
+      return;
+    }
+
+    if (trimmed.length > 150) {
+      setError("Item description exceeds the maximum limit of 150 characters.");
+      return;
+    }
+
+    setError(null);
+    setIsLoading(true);
+
+    try {
+      const response = await fetch("/api/classify", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ item: trimmed }),
+      });
+
+      const data: ClassifyResponse = await response.json();
+
+      if (response.ok && data.success) {
+        setResult(data.data);
+        setError(null);
+      } else {
+        setError(
+          !data.success && data.error
+            ? data.error
+            : "Could not classify the waste item. Please try again."
+        );
+      }
+    } catch {
+      setError(
+        "Unable to connect to the classification service. Please check your internet connection and try again."
+      );
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleInputChange = (value: string) => {
     setWasteItem(value);
-    if (phase3Notice) {
-      setPhase3Notice(null);
+    if (error) {
+      setError(null);
     }
   };
 
@@ -42,53 +81,47 @@ export default function Home() {
             onChange={handleInputChange}
             onSubmit={handleSubmit}
             maxLength={150}
-            isLoading={false}
+            isLoading={isLoading}
           />
 
-          {/* Feedback notice for Phase 3 button click */}
-          {phase3Notice && (
+          {/* Friendly Error Alert */}
+          {error && (
             <div
-              role="status"
-              className="mt-4 p-3 rounded-lg bg-emerald-50 border border-emerald-200 text-xs text-emerald-800 flex items-start gap-2"
+              role="alert"
+              aria-live="polite"
+              className="mt-5 p-4 rounded-lg bg-red-50 border border-red-200 text-sm text-red-800 flex items-start gap-3 shadow-sm"
             >
               <svg
-                className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5"
+                className="w-5 h-5 text-red-600 shrink-0 mt-0.5"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
+                aria-hidden="true"
               >
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
-                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                 />
               </svg>
-              <span>{phase3Notice}</span>
+              <div>
+                <p className="font-semibold text-xs uppercase tracking-wider">Classification Notice</p>
+                <p className="text-xs text-red-700 mt-0.5 leading-relaxed">{error}</p>
+              </div>
             </div>
           )}
         </div>
 
-        {/* Skeleton Preview Section */}
-        <section aria-label="Loading and Result Layout Preview" className="space-y-3">
-          <div className="flex items-center justify-between">
-            <h2 className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
-              Result Component Preview (Phase 4/5 Integration Target)
-            </h2>
-            <button
-              type="button"
-              onClick={() => setShowSkeletonPreview((prev) => !prev)}
-              className="text-xs font-medium text-emerald-700 hover:text-emerald-800 underline underline-offset-2 focus:outline-none focus:ring-2 focus:ring-emerald-500 rounded"
-            >
-              {showSkeletonPreview ? "Hide Skeleton" : "Preview Loading Skeleton"}
-            </button>
-          </div>
+        {/* Dynamic Result Area */}
+        <section aria-label="Classification Output" className="w-full">
+          {isLoading && <ResultSkeleton />}
 
-          {showSkeletonPreview ? (
-            <ResultSkeleton />
-          ) : (
-            <div className="border border-dashed border-slate-200 rounded-xl p-6 text-center text-xs text-slate-400">
-              Click &ldquo;Preview Loading Skeleton&rdquo; to inspect the animated placeholder designed for classification results.
+          {!isLoading && result && <ResultCard result={result} />}
+
+          {!isLoading && !result && !error && (
+            <div className="border border-dashed border-slate-200 rounded-xl p-8 text-center text-xs text-slate-400">
+              Enter an item above or click one of the quick examples to see the classification and disposal guidance.
             </div>
           )}
         </section>

@@ -6,6 +6,38 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [0.5.0] - 2026-09-17
+
+### Added
+* Connected frontend in `src/app/page.tsx` to `POST /api/classify` using native browser `fetch`.
+* Integrated live request lifecycle states: `isLoading`, `result`, and `error`.
+* Wired `WasteInput` loading state to disable input and button, prevent duplicate submissions, and show the "Analyzing..." animated indicator during active API calls.
+* Created `ResultCard.tsx` in `src/components/ResultCard.tsx`:
+  * Renders normalized item name and dynamic color-coded category badges (Blue for Recyclable, Green for Organic, Amber for Hazardous/E-Waste, Slate for Landfill).
+  * Displays step-by-step disposal instructions, material reasoning explanation, and a highlighted sustainability reduction tip.
+  * Displays an uncertainty advisory callout when `uncertainty_note` is present.
+  * Displays origin transparency badge (`AI Verified` vs `Standard Rule`).
+* Created reusable `DisclaimerBanner.tsx` in `src/components/DisclaimerBanner.tsx` informing users of municipal recycling variations.
+* Added friendly client error notifications for network failures, validation limits, or API errors without exposing internal stack traces.
+
+### Changed
+* Replaced Phase 3 mock submission handler with real asynchronous classification pipeline.
+* Removed obsolete manual "Preview Loading Skeleton" section in `page.tsx` in favor of dynamic skeleton display during active requests.
+* Updated `ROADMAP.md` checking off Phase 5 tasks.
+* Updated `PROJECT_CONTEXT.md` recording Phase 5 completion and documenting readiness for Phase 6.
+
+### Fixed
+* Prevented duplicate form submissions during in-flight classification requests.
+
+### Important Decisions
+* **Native Fetch & Zero Extra Libraries**: Implemented client-side API dispatch using native browser `fetch` without adding Axios or external state management packages.
+* **Component Modularity**: Isolated `ResultCard` and `DisclaimerBanner` into typed, self-contained components preserving existing typography, spacing, and Tailwind color conventions.
+
+### Next Step
+* Await approval to proceed to Phase 6: Error States, Edge Cases & Responsible AI Safeguards.
+
+---
+
 ## [0.4.0] - 2026-09-16
 
 ### Added
