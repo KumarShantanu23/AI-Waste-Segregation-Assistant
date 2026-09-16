@@ -6,6 +6,28 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [0.6.0] - 2026-09-17
+
+### Added
+* High-priority safety classification rules in `src/lib/fallbackClassifier.ts`:
+  * **Medical Sharps & Syringes**: Categorized as `Hazardous / E-Waste` with explicit instructions to place in puncture-proof sharps containers or rigid heavy plastic bottles with sealed lids and take to authorized pharmacy/hospital drop-off facilities.
+  * **Pharmaceuticals & Medications**: Categorized as `Hazardous / E-Waste` with instructions against flushing or general dumping, directing users to community pharmacy drug take-back kiosks or DEA collection events.
+  * **Hazardous Household Chemicals & Power Sources**: Categorized as `Hazardous / E-Waste` covering lithium-ion batteries, solvents, motor oils, fluorescent tubes, and paints with HHW drop-off instructions.
+  * **Broken Glass Safety Rule**: Categorized as `Landfill / General Waste` with strict prohibition from curbside recycling and mandatory puncture-resistant wrapping instructions to protect waste workers.
+  * **Transparent Uncertain Fallback**: Updated unknown item fallback to honestly communicate offline classifier limitations, generate an `uncertainty_note`, and advise consulting local municipal directories instead of providing confident "when in doubt, place in landfill" messaging.
+* Updated `src/lib/gemini.ts` system prompt reinforcing safety constraints for broken glass non-recyclability, medical sharps, and pharmaceuticals.
+* Automated Phase 6 test suite covering edge-case classification, input normalization, HTML/punctuation stripping, and boundary limits.
+
+### Changed
+* Updated input normalization to safely strip punctuation, control characters, and collapse irregular whitespace.
+* Updated `ROADMAP.md` checking off Phase 6 deliverables.
+* Updated `PROJECT_CONTEXT.md` recording Phase 6 completion and documenting readiness for Phase 7.
+
+### Next Step
+* Await approval to proceed to Phase 7: Verification & Final Polish.
+
+---
+
 ## [0.5.0] - 2026-09-17
 
 ### Added

@@ -55,10 +55,13 @@ This checklist tracks the implementation progress of the **AI Waste Segregation 
 ---
 
 ## Phase 6: Error States, Edge Cases & Responsible AI
-- [ ] Add validation for empty or whitespace-only input
-- [ ] Handle ambiguous waste items with uncertainty advisories
-- [ ] Add friendly error banners for network timeouts or API errors
-- [ ] Add character length limits (2 to 150 chars) and sanitization
+- [x] Add validation for empty or whitespace-only input
+- [x] Handle ambiguous waste items with uncertainty advisories
+- [x] Add friendly error banners for network timeouts or API errors
+- [x] Add character length limits (2 to 150 chars) and safe input normalization
+- [x] Harden fallback classifier for high-risk items (sharps/medical waste, expired medicines, hazardous chemicals/paint/batteries, broken glass safety)
+- [x] Ensure broken glass is strictly classified as non-recyclable with protective wrapping instructions
+- [x] Improve generic fallback for unknown items to communicate classification uncertainty rather than confident landfill guidance
 
 ---
 

@@ -1,8 +1,8 @@
 # Project Context
 
-**File Version:** 1.4.0  
+**File Version:** 1.5.0  
 **Last Updated:** 2026-09-17  
-**Active Phase:** Phase 5 — Result Card & Guidance Display (Complete, Awaiting Phase 6 Approval)  
+**Active Phase:** Phase 6 — Error States, Edge Cases & Responsible AI (Complete, Awaiting Phase 7 Approval)  
 
 ---
 
@@ -18,7 +18,7 @@
 
 ## 2. Current Implementation Status
 
-* **Development Phase:** Phase 5 Complete (Result Card & Guidance Display)
+* **Development Phase:** Phase 6 Complete (Error States, Edge Cases & Responsible AI)
 * **Completed Features:**
   * Git repository initialized with documentation suite.
   * Next.js 15, React 19, TypeScript, and Tailwind CSS configured.
@@ -28,10 +28,18 @@
   * Loading state (`isLoading`) wired to `WasteInput` (disabling input/button, displaying spinner) and rendering `ResultSkeleton`.
   * `ResultCard` component created in `src/components/ResultCard.tsx` with dynamic category styling (Blue, Green, Amber, Slate), disposal method, material explanation, sustainability tip, conditional uncertainty advisory, and source transparency.
   * `DisclaimerBanner` component created in `src/components/DisclaimerBanner.tsx` reminding users of municipal recycling rule differences.
-  * Friendly error handling for client/API validation and connection errors without exposing internals.
-  * 41 automated test cases passing across page rendering, all 5 core evaluation prompts, and input validation bounds.
-* **Current Feature:** Frontend-to-backend integration complete; real results rendered dynamically.
-* **Next Task:** Phase 6 — Error States, Edge Cases & Responsible AI Safeguards.
+  * Robust client/server validation enforcing trimmed string length between 2 and 150 characters with accessible alert notifications.
+  * Hardened deterministic fallback classifier (`src/lib/fallbackClassifier.ts`):
+    * Dedicated rule for medical sharps and syringes (`Hazardous / E-Waste`, puncture-proof container guidance).
+    * Dedicated rule for pharmaceuticals and expired medicines (`Hazardous / E-Waste`, drug take-back guidance).
+    * Dedicated rule for hazardous chemicals, paints, and lithium batteries (`Hazardous / E-Waste`, HHW depot guidance).
+    * Dedicated safety rule for broken glass (`Landfill / General Waste`, strictly non-recyclable, protective wrapping instructions).
+    * Improved transparent generic fallback for unknown items explicitly communicating offline classification uncertainty and advising municipal reference rather than confident landfill advice.
+  * Updated Gemini system instructions in `src/lib/gemini.ts` reinforcing critical safety constraints (broken glass non-recyclability, sharps/pharmaceutical containment).
+  * 32 local unit tests and 63 HTTP/API automated tests passing with 100% success.
+  * Production build (`npm run build`) passing with zero warnings or errors.
+* **Current Feature:** Hardened edge cases, safety rules, and transparent error handling complete.
+* **Next Task:** Phase 7 — Verification & Final Polish (Responsive tests, accessibility, final documentation).
 
 ---
 
