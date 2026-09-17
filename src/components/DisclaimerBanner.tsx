@@ -9,10 +9,10 @@ export function DisclaimerBanner({ className = "" }: DisclaimerBannerProps) {
     <div
       role="note"
       aria-label="Local municipal regulation notice"
-      className={`rounded-lg p-3.5 bg-slate-50 border border-slate-200 text-xs text-slate-600 flex items-start gap-2.5 ${className}`}
+      className={`rounded-xl p-4 bg-slate-50/80 border border-slate-200/80 text-xs text-slate-600 flex items-start gap-3 ${className}`}
     >
       <svg
-        className="w-4 h-4 text-slate-500 shrink-0 mt-0.5"
+        className="w-4 h-4 text-slate-400 shrink-0 mt-0.5"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
@@ -26,7 +26,7 @@ export function DisclaimerBanner({ className = "" }: DisclaimerBannerProps) {
         />
       </svg>
       <p className="leading-relaxed">
-        <span className="font-semibold text-slate-700">Municipal Notice:</span> Local waste and recycling guidelines differ by municipality. While this guidance reflects standard material processing rules, always verify specific item acceptance with your local waste utility.
+        <span className="font-bold text-slate-700">Municipal Guidance Note:</span> Waste management and recycling capabilities vary across local jurisdictions. This assistant provides standardized material segregation guidance; always follow local municipal regulations for specific item acceptance and hazardous disposal events.
       </p>
     </div>
   );

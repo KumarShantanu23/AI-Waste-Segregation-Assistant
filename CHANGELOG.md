@@ -6,6 +6,32 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [0.7.0] - 2026-09-17
+
+### Added
+* Redesigned Hero in `src/components/Header.tsx` with headline: *"Know where your waste belongs."*, SDG 12 context badge, concise subhead, and 3 value pillars.
+* Centralized input experience in `src/components/WasteInput.tsx` with clear action hierarchy, search icon, dynamic character count styling, and enhanced focus indicators.
+* Polished `QuickExamples.tsx` with category color indicators, tactile hover micro-interactions, and disabled state during in-flight queries.
+* Elevated `ResultCard.tsx` with:
+  * High-contrast, accessible category badges combining distinct icons, labels, and borders for all 4 streams.
+  * Highlighted, scannable **Recommended Disposal Method** callout card as the central action.
+  * Clearly separated **Why It Belongs in This Category** educational reasoning.
+  * Distinct eco-accented **Sustainability & Reduction Tip** container.
+  * Prominent **Uncertainty & Safety Advisory** with high-visibility notice for ambiguous items (*"Classification uncertain — check local guidance"*).
+  * Seamlessly integrated municipal disclaimer.
+* Dedicated **Batteries & Portable Power Sources** classification rule in `src/lib/fallbackClassifier.ts` separating battery terminal taping and fire hazards from paints/liquids.
+* Geographically neutral language across sharps and pharmaceutical rules (removed US-specific FDA and DEA references).
+* Intentional empty state in `src/app/page.tsx` displaying a 3-step segregation guide and a 4-stream visual quick reference.
+* Ambient eco-tint radial gradient and reduced-motion reset in `src/app/globals.css`.
+* Comprehensive automated end-to-end verification suite (`test_phase7_complete.js`) passing 47/47 assertions across all 18 required test cases.
+
+### Changed
+* Updated `ROADMAP.md` checking off all Phase 7 milestones.
+* Updated `PROJECT_CONTEXT.md` to version 1.6.0 documenting project completion and internship-demo readiness.
+* Reconciled `README.md` project status section.
+
+---
+
 ## [0.6.0] - 2026-09-17
 
 ### Added

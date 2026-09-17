@@ -66,12 +66,19 @@ This checklist tracks the implementation progress of the **AI Waste Segregation 
 ---
 
 ## Phase 7: Verification & Final Polish
-- [ ] Test all 5 core example items:
+- [x] Test all 5 core example items:
   - *"plastic water bottle"*
   - *"used tissue"*
   - *"pizza box with leftover food"*
   - *"old mobile phone"*
   - *"glass bottle"*
-- [ ] Verify responsive layout across mobile, tablet, and desktop viewports
-- [ ] Verify accessibility (ARIA labels, focus outlines, WCAG AA contrast)
-- [ ] Finalize documentation and update screenshots/instructions for internship submission
+- [x] Test safety edge cases (used syringe, expired medicine, battery, broken glass)
+- [x] Separate batteries into dedicated rule with terminal taping and fire hazard explanations
+- [x] Remove US-specific references (FDA, DEA) for geographically neutral medical guidance
+- [x] Implement prominent uncertainty banner ("Classification uncertain — check local guidance")
+- [x] Elevate hero with "Know where your waste belongs." headline and SDG 12 context
+- [x] Replace awkward blank empty state with 3-step guide and 4-stream legend
+- [x] Verify responsive layout across mobile (320px–430px), tablet (768px–1024px), and desktop (1280px–1440px)
+- [x] Verify accessibility (ARIA labels, focus-visible rings, WCAG AA contrast, reduced-motion preferences)
+- [x] Production build passes cleanly (`npm run build`, 0 warnings, 0 errors)
+- [x] Finalize documentation suite and ensure clean Git history for internship submission

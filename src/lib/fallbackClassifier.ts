@@ -63,13 +63,13 @@ export function getFallbackClassification(rawItem: string): WasteClassificationR
       item: rawItem.trim(),
       category: "Hazardous / E-Waste",
       disposal_method:
-        "Do NOT place loose in household trash or recycling bins. Immediately place into an FDA-cleared sharps container or a heavy-duty, puncture-resistant plastic container (such as a laundry detergent bottle) with a screw-on lid sealed with heavy tape and labeled 'BIOHAZARD / SHARPS'. Deliver to an authorized hospital, pharmacy take-back drop-box, or municipal hazardous waste facility.",
+        "Do NOT place loose in household trash or recycling bins. Place immediately into a dedicated puncture-resistant sharps container or a rigid heavy-duty plastic container (such as a thick detergent bottle) with a secure screw-on lid labeled 'SHARPS / BIOHAZARD'. Deliver to an authorized pharmacy take-back drop-box, healthcare clinic collection point, or municipal hazardous waste facility.",
       explanation:
-        "Used needles, syringes, and medical sharps carry severe laceration, puncture, and bloodborne pathogen infection risks for waste collection workers and sorting facility staff.",
+        "Used needles, syringes, and medical sharps carry severe puncture and bloodborne pathogen infection risks for waste collection workers and sorting facility staff.",
       sustainability_tip:
-        "Inquire with your healthcare provider or local pharmacy about pre-paid mail-back sharps container programs or approved community drop-box kiosks.",
+        "Consult your local pharmacy, healthcare provider, or public health service about pre-paid mail-back sharps container programs or approved community drop-off points.",
       uncertainty_note:
-        "Medical sharps disposal is strictly regulated by state and local public health authorities. Never dispose of medical sharps in curbside recycling or loose household trash.",
+        "Medical sharps disposal is strictly regulated by regional public health authorities. Never dispose of medical sharps in curbside recycling or loose household trash.",
       source: "fallback",
     };
   }
@@ -93,22 +93,44 @@ export function getFallbackClassification(rawItem: string): WasteClassificationR
       item: rawItem.trim(),
       category: "Hazardous / E-Waste",
       disposal_method:
-        "Do NOT flush down the toilet, pour down the sink drain, or throw loose into household trash. Take unused or expired medicines to an authorized community pharmacy drug take-back kiosk, hospital collection receptacle, or DEA National Prescription Drug Take Back day.",
+        "Do NOT flush down toilets, pour down sinks, or throw loose into household trash. Take unused or expired medicines to an authorized community pharmacy take-back kiosk, healthcare facility collection receptacle, or municipal pharmaceutical disposal event.",
       explanation:
-        "Flushed or landfilled pharmaceuticals bypass municipal wastewater filtration, leaching active pharmaceutical ingredients into rivers, lakes, and drinking water reservoirs where they harm aquatic organisms and accelerate antimicrobial resistance.",
+        "Flushed or landfilled pharmaceuticals bypass municipal wastewater treatment, leaching active chemical compounds into rivers, lakes, and drinking water sources where they disrupt aquatic ecosystems and accelerate antimicrobial resistance.",
       sustainability_tip:
-        "Purchase over-the-counter medications only in quantities you reasonably expect to use before the expiration date to minimize medical waste.",
+        "Purchase over-the-counter medications in quantities you reasonably expect to use before the expiration date to minimize pharmaceutical waste.",
       uncertainty_note:
-        "If no drug take-back program is available locally, FDA guidance advises mixing medicines with unpalatable substances (such as used coffee grounds or cat litter) in a sealed bag before placing in general trash (unless on the FDA flush list).",
+        "Pharmaceutical take-back options vary by country and municipality. Check with local pharmacies or public health authorities for authorized local collection points.",
       source: "fallback",
     };
   }
 
-  // 4. Hazardous household chemicals, paint, solvents & batteries
+  // 4. Batteries & portable power sources (Dedicated Rule)
   if (
     normalized.includes("battery") ||
     normalized.includes("batteries") ||
     normalized.includes("lithium") ||
+    normalized.includes("accumulator") ||
+    normalized.includes("power bank") ||
+    normalized.includes("button cell") ||
+    normalized.includes("alkaline")
+  ) {
+    return {
+      item: rawItem.trim(),
+      category: "Hazardous / E-Waste",
+      disposal_method:
+        "Do NOT place in curbside trash or standard recycling bins. Cover exposed terminals of lithium and button batteries with clear tape to prevent short-circuits, then drop off at a dedicated battery recycling collection bin at participating supermarkets, hardware stores, or municipal e-waste depots.",
+      explanation:
+        "Batteries contain reactive chemicals, heavy metals (such as lithium, cobalt, nickel, and lead), and stored electrical energy. When crushed inside collection trucks or landfills, damaged lithium batteries cause explosive thermal runaway fires and release toxic chemicals.",
+      sustainability_tip:
+        "Switch to high-capacity rechargeable batteries for frequently used devices to significantly cut single-use battery consumption and toxic waste.",
+      uncertainty_note:
+        "Dedicated battery collection boxes are widely available at major electronics retailers, hardware stores, and municipal drop-off centers.",
+      source: "fallback",
+    };
+  }
+
+  // 5. Hazardous household chemicals, paint & solvents
+  if (
     normalized.includes("chemical") ||
     normalized.includes("paint") ||
     normalized.includes("solvent") ||
@@ -131,11 +153,11 @@ export function getFallbackClassification(rawItem: string): WasteClassificationR
       disposal_method:
         "Do NOT pour down household drains, into storm sewers, or toss into standard household trash or recycling. Keep in original sealed containers with labels intact and take to a municipal Household Hazardous Waste (HHW) drop-off depot or designated collection event.",
       explanation:
-        "Batteries (especially lithium-ion) cause explosive thermal runaway fires when compressed in collection trucks. Household chemicals and paints contain heavy metals, VOCs, and toxic solvents that contaminate soil and municipal water tables.",
+        "Household chemicals, solvents, and paints contain heavy metals, volatile organic compounds (VOCs), and toxic chemicals that leach into groundwater and release hazardous vapors.",
       sustainability_tip:
         "Buy only the precise quantity of paint or chemical required for home tasks, and share usable leftover supplies with community organizations or neighbors.",
       uncertainty_note:
-        "Many local hardware and home improvement retailers offer free drop-off bins specifically for rechargeable batteries and fluorescent tubes.",
+        "Household hazardous waste requires specialized handling at certified facilities. Check your municipality's public works schedule for local HHW drop-off days.",
       source: "fallback",
     };
   }
@@ -327,7 +349,7 @@ export function getFallbackClassification(rawItem: string): WasteClassificationR
     sustainability_tip:
       "Check product packaging for standardized recycling symbols (such as How2Recycle labels) or manufacturer take-back programs before disposal.",
     uncertainty_note:
-      "Uncertain classification: The offline fallback engine could not identify this specific material. Consult your local municipal waste management guidelines before disposal.",
+      "Classification uncertain — check local guidance. The offline fallback engine could not identify this specific material. Consult your local municipal waste management guidelines before disposal.",
     source: "fallback",
   };
 }

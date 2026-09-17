@@ -75,7 +75,7 @@ export default function Home() {
         <Header />
 
         {/* Core Input Card */}
-        <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-6 sm:p-8">
+        <div className="bg-white rounded-2xl border border-slate-200/90 shadow-sm hover:shadow transition-shadow p-6 sm:p-8">
           <WasteInput
             value={wasteItem}
             onChange={handleInputChange}
@@ -84,12 +84,12 @@ export default function Home() {
             isLoading={isLoading}
           />
 
-          {/* Friendly Error Alert */}
+          {/* Friendly, Accessible Error Alert */}
           {error && (
             <div
               role="alert"
               aria-live="polite"
-              className="mt-5 p-4 rounded-lg bg-red-50 border border-red-200 text-sm text-red-800 flex items-start gap-3 shadow-sm"
+              className="mt-5 p-4 rounded-xl bg-red-50 border border-red-200 text-sm text-red-900 flex items-start gap-3 shadow-2xs"
             >
               <svg
                 className="w-5 h-5 text-red-600 shrink-0 mt-0.5"
@@ -106,8 +106,8 @@ export default function Home() {
                 />
               </svg>
               <div>
-                <p className="font-semibold text-xs uppercase tracking-wider">Classification Notice</p>
-                <p className="text-xs text-red-700 mt-0.5 leading-relaxed">{error}</p>
+                <p className="font-bold text-xs uppercase tracking-wider text-red-800">Notice</p>
+                <p className="text-xs sm:text-sm text-red-700 mt-0.5 leading-relaxed">{error}</p>
               </div>
             </div>
           )}
@@ -120,8 +120,76 @@ export default function Home() {
           {!isLoading && result && <ResultCard result={result} />}
 
           {!isLoading && !result && !error && (
-            <div className="border border-dashed border-slate-200 rounded-xl p-8 text-center text-xs text-slate-400">
-              Enter an item above or click one of the quick examples to see the classification and disposal guidance.
+            <div className="bg-white/80 backdrop-blur-xs rounded-2xl border border-slate-200/80 p-6 sm:p-8 shadow-2xs space-y-6">
+              <div className="text-center max-w-md mx-auto space-y-1">
+                <span className="text-xs font-bold text-emerald-700 uppercase tracking-wider">
+                  How It Works
+                </span>
+                <h3 className="text-lg font-bold text-slate-800">
+                  Three Simple Steps to Segregate Responsibly
+                </h3>
+                <p className="text-xs text-slate-500 leading-relaxed">
+                  Proper waste sorting keeps recyclable materials clean, diverts organic matter from landfills, and shields sanitation workers from hazards.
+                </p>
+              </div>
+
+              {/* 3-Step Process */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-1">
+                <div className="p-4 rounded-xl bg-slate-50/80 border border-slate-100 space-y-1.5">
+                  <div className="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-800 font-bold text-xs flex items-center justify-center">
+                    1
+                  </div>
+                  <h4 className="text-xs font-bold text-slate-800">Describe Item</h4>
+                  <p className="text-[11px] text-slate-500 leading-relaxed">
+                    Type any everyday item, food package, container, or electronic device.
+                  </p>
+                </div>
+
+                <div className="p-4 rounded-xl bg-slate-50/80 border border-slate-100 space-y-1.5">
+                  <div className="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-800 font-bold text-xs flex items-center justify-center">
+                    2
+                  </div>
+                  <h4 className="text-xs font-bold text-slate-800">AI / Rule Sorting</h4>
+                  <p className="text-[11px] text-slate-500 leading-relaxed">
+                    Get categorized into one of 4 standardized streams with contamination awareness.
+                  </p>
+                </div>
+
+                <div className="p-4 rounded-xl bg-slate-50/80 border border-slate-100 space-y-1.5">
+                  <div className="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-800 font-bold text-xs flex items-center justify-center">
+                    3
+                  </div>
+                  <h4 className="text-xs font-bold text-slate-800">Dispose Safely</h4>
+                  <p className="text-[11px] text-slate-500 leading-relaxed">
+                    Follow step-by-step instructions and practical tips to minimize waste generation.
+                  </p>
+                </div>
+              </div>
+
+              {/* 4 Waste Streams Quick Legend */}
+              <div className="pt-3 border-t border-slate-100">
+                <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3 text-center sm:text-left">
+                  The Four Waste Streams:
+                </p>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                  <div className="p-3 rounded-lg bg-blue-50/60 border border-blue-100 text-left">
+                    <span className="block font-bold text-xs text-blue-800">Recyclable</span>
+                    <span className="text-[11px] text-blue-700/80 leading-snug">Bottles, clean paper, cans</span>
+                  </div>
+                  <div className="p-3 rounded-lg bg-emerald-50/60 border border-emerald-100 text-left">
+                    <span className="block font-bold text-xs text-emerald-800">Organic</span>
+                    <span className="text-[11px] text-emerald-700/80 leading-snug">Food scraps, greasy boxes</span>
+                  </div>
+                  <div className="p-3 rounded-lg bg-amber-50/60 border border-amber-100 text-left">
+                    <span className="block font-bold text-xs text-amber-900">Hazardous</span>
+                    <span className="text-[11px] text-amber-800/80 leading-snug">Batteries, e-waste, sharps</span>
+                  </div>
+                  <div className="p-3 rounded-lg bg-slate-100/70 border border-slate-200 text-left">
+                    <span className="block font-bold text-xs text-slate-800">Landfill</span>
+                    <span className="text-[11px] text-slate-600 leading-snug">Soiled wipes, broken glass</span>
+                  </div>
+                </div>
+              </div>
             </div>
           )}
         </section>
