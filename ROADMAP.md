@@ -79,6 +79,6 @@ This checklist tracks the implementation progress of the **AI Waste Segregation 
 - [x] Elevate hero with "Know where your waste belongs." headline and SDG 12 context
 - [x] Replace awkward blank empty state with 3-step guide and 4-stream legend
 - [x] Verify responsive layout across mobile (320px–430px), tablet (768px–1024px), and desktop (1280px–1440px)
-- [x] Verify accessibility (ARIA labels, focus-visible rings, WCAG AA contrast, reduced-motion preferences)
+- [x] Verify accessibility (ARIA labels, focus-visible rings, accessible contrast, reduced-motion preferences)
 - [x] Production build passes cleanly (`npm run build`, 0 warnings, 0 errors)
 - [x] Finalize documentation suite and ensure clean Git history for internship submission

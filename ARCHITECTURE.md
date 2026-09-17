@@ -45,7 +45,7 @@ This avoids the overhead of managing separate frontend and backend repositories,
 +------------------------------------+------------------------------------+
 |                       GOOGLE GEMINI API ENGINE                          |
 |                                                                         |
-|  - Model: gemini-1.5-flash (or gemini-2.0-flash)                        |
+|  - Model: gemini-3.8-flash                                             |
 |  - Output Schema: JSON Object                                           |
 |  - Low Latency, High Reasoning Accuracy                                 |
 +-------------------------------------------------------------------------+
@@ -83,7 +83,7 @@ This avoids the overhead of managing separate frontend and backend repositories,
 
 ### 2.3 AI / LLM Integration
 * **Provider:** Google Gemini API (`@google/genai` or official REST endpoint).
-* **Recommended Model:** `gemini-1.5-flash` (or `gemini-2.0-flash`), prioritizing sub-second latency and high adherence to JSON schemas.
+* **Recommended Model:** `gemini-3.8-flash`, prioritizing sub-second latency and high adherence to JSON schemas.
 * **Prompt Strategy:**
   * System Instruction: *"You are an expert environmental sustainability and waste segregation specialist assisting users in identifying the proper waste disposal category under UN SDG 12."*
   * Material Reasoning: Explicit guidelines on food contamination (e.g., grease on cardboard), composite materials (tetra packs, blister packs), and electronic/battery fire hazards.
@@ -158,4 +158,4 @@ This avoids the overhead of managing separate frontend and backend repositories,
 1. **No Separate Microservices:** Next.js fulfills both UI rendering and API proxying in a single process.
 2. **No External Database:** Avoids unnecessary database hosting, migration scripts, and maintenance.
 3. **No Auth/User Management:** Waste segregation should have zero barrier to entry.
-4. **No Heavy Vector DB or RAG Pipeline:** Gemini 1.5/2.0 Flash possesses comprehensive baseline knowledge of recycling guidelines and material science; a heavy vector database would add unnecessary latency, cost, and complexity.
+4. **No Heavy Vector DB or RAG Pipeline:** Gemini 3.8 Flash possesses comprehensive baseline knowledge of recycling guidelines and material science; a heavy vector database would add unnecessary latency, cost, and complexity.

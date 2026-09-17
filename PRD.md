@@ -94,7 +94,7 @@ When people are unsure, they either guess (leading to contaminated batches that 
 | ID | Requirement | Acceptance Criteria |
 |---|---|---|
 | **FR-1** | Text Input Entry | User can input any text string up to 150 characters. |
-| **FR-2** | Sample Prompts | Clicking any sample chip populates the input and triggers classification. |
+| **FR-2** | Sample Prompts | Clicking any sample chip populates the input field, allowing the user to review or edit before submitting for classification. |
 | **FR-3** | Server-side AI Proxy | Client requests `/api/classify`; API key is never exposed to client-side code. |
 | **FR-4** | Structured Schema Output | Backend validates LLM response against strict JSON schema (`item`, `category`, `disposal_method`, `explanation`, `sustainability_tip`). |
 | **FR-5** | Visual Classification States | Distinct visual styling and badge colors for each waste category. |
@@ -106,7 +106,7 @@ When people are unsure, they either guess (leading to contaminated batches that 
 ## 7. Non-Functional Requirements
 
 * **Performance**: Classification response rendered within < 2.5 seconds under normal network conditions.
-* **Accessibility**: Clean contrast ratios (WCAG AA), accessible labels on inputs, keyboard navigable.
+* **Accessibility**: Accessibility checks performed for semantic structure, focus states, color independence, ARIA messaging, and reduced-motion support.
 * **Simplicity & Maintainability**: Clean component architecture, minimal dependencies, straightforward setup.
 * **Reliability**: Deterministic fallback responses if AI service is unreachable or unconfigured.
 

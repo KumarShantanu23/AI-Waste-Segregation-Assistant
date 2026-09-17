@@ -151,7 +151,7 @@ export function ResultCard({ result }: ResultCardProps) {
                 <svg className="w-3 h-3 text-purple-600" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                   <path d="M10 2a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 0110 2zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 0110 15zm8-5a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0118 10zM5 10a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 015 10z" />
                 </svg>
-                <span>AI Verified</span>
+                <span>AI Classification</span>
               </>
             ) : (
               <>

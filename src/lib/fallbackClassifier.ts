@@ -12,6 +12,14 @@ function normalizeText(text: string): string {
 }
 
 /**
+ * Checks whether the text contains the target word as a distinct, standalone whole word.
+ * Avoids false-positive overmatching on substrings (e.g. "candle" matching "can", "pillow" matching "pill").
+ */
+function hasWholeWord(text: string, word: string): boolean {
+  return new RegExp(`\\b${word}\\b`, "i").test(text);
+}
+
+/**
  * Deterministic local fallback classification engine.
  * Provides accurate, safe, and educational waste disposal recommendations
  * when Google Gemini is unavailable, unconfigured, rate-limited, or returns an error.
@@ -80,7 +88,8 @@ export function getFallbackClassification(rawItem: string): WasteClassificationR
     normalized.includes("medicine") ||
     normalized.includes("medication") ||
     normalized.includes("pharmaceutical") ||
-    normalized.includes("pill") ||
+    hasWholeWord(normalized, "pill") ||
+    hasWholeWord(normalized, "pills") ||
     normalized.includes("capsule") ||
     normalized.includes("antibiotic") ||
     normalized.includes("painkiller") ||
@@ -316,8 +325,10 @@ export function getFallbackClassification(rawItem: string): WasteClassificationR
   if (
     normalized.includes("cardboard") ||
     normalized.includes("paper") ||
-    normalized.includes("can") ||
-    normalized.includes("tin") ||
+    hasWholeWord(normalized, "can") ||
+    hasWholeWord(normalized, "cans") ||
+    hasWholeWord(normalized, "tin") ||
+    hasWholeWord(normalized, "tins") ||
     normalized.includes("aluminum") ||
     normalized.includes("newspaper") ||
     normalized.includes("magazine")
