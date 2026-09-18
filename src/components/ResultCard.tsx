@@ -124,7 +124,7 @@ export function ResultCard({ result }: ResultCardProps) {
           </h2>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2">
+        <div>
           {/* Category Badge (Icon + Text + High Contrast Border) */}
           <div
             className={`inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold border shadow-2xs ${config.badgeBg}`}
@@ -132,36 +132,6 @@ export function ResultCard({ result }: ResultCardProps) {
             {config.icon}
             <span>{result.category}</span>
           </div>
-
-          {/* Honest Source Transparency Badge */}
-          <span
-            className={`text-[11px] font-semibold px-2.5 py-1 rounded-md border flex items-center gap-1.5 ${
-              result.source === "gemini"
-                ? "bg-purple-50 text-purple-700 border-purple-200"
-                : "bg-slate-100 text-slate-700 border-slate-200"
-            }`}
-            title={
-              result.source === "gemini"
-                ? "Dynamically categorized via Google Gemini"
-                : "Categorized using local deterministic rule engine"
-            }
-          >
-            {result.source === "gemini" ? (
-              <>
-                <svg className="w-3 h-3 text-purple-600" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                  <path d="M10 2a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 0110 2zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 0110 15zm8-5a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0118 10zM5 10a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 015 10z" />
-                </svg>
-                <span>AI Classification</span>
-              </>
-            ) : (
-              <>
-                <svg className="w-3 h-3 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
-                <span>Standard Rule</span>
-              </>
-            )}
-          </span>
         </div>
       </div>
 
@@ -271,8 +241,38 @@ export function ResultCard({ result }: ResultCardProps) {
         </p>
       </div>
 
+      {/* Classification Source Secondary Metadata */}
+      <div className="flex items-center gap-1.5 text-xs text-slate-500 pt-1">
+        <span className="text-slate-400">Classification source:</span>
+        <span className="font-medium text-slate-600">
+          {result.source === "gemini" ? "AI classification" : "Standard safety rule"}
+        </span>
+        <span
+          tabIndex={0}
+          role="img"
+          className="inline-flex items-center text-slate-400 hover:text-slate-600 focus:text-slate-600 focus:outline-none transition-colors cursor-help"
+          title="Shows whether this result came from the AI model or the assistant's built-in safety classification rules."
+          aria-label="Shows whether this result came from the AI model or the assistant's built-in safety classification rules."
+        >
+          <svg
+            className="w-3.5 h-3.5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+        </span>
+      </div>
+
       {/* Responsible AI Municipal Disclaimer */}
-      <DisclaimerBanner className="mt-4" />
+      <DisclaimerBanner className="mt-2" />
     </article>
   );
 }

@@ -27,9 +27,8 @@ export function ResultSkeleton({ className = "" }: ResultSkeletonProps) {
           <div className="h-3 w-24 bg-slate-200 rounded" />
           <div className="h-7 w-52 bg-slate-300 rounded-lg" />
         </div>
-        <div className="flex items-center gap-2">
+        <div>
           <div className="h-8 w-32 bg-slate-200 rounded-full" />
-          <div className="h-6 w-20 bg-slate-200 rounded" />
         </div>
       </div>
 
@@ -65,6 +64,9 @@ export function ResultSkeleton({ className = "" }: ResultSkeletonProps) {
         </div>
         <div className="h-3 w-11/12 bg-slate-200 rounded pl-6" />
       </div>
+
+      {/* Classification Source Skeleton */}
+      <div className="h-3 w-40 bg-slate-200 rounded" />
 
       {/* Disclaimer Banner Skeleton */}
       <div className="p-3.5 rounded-lg bg-slate-50 border border-slate-100 flex items-center justify-between">
